@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="kk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeLingua - Web негіздері</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="website icon" type="png" href="web.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .code-block {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: #f8fafc;
+            border-radius: 1rem;
+            border: 1px solid #374151;
+        }
+        .tech-badge {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+        }
+        .table-modern {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .table-modern th {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            font-weight: 600;
+            padding: 1.5rem;
+            text-align: left;
+        }
+        .table-modern td {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .table-modern tr:last-child td {
+            border-bottom: none;
+        }
+        .table-modern tr:hover {
+            background-color: #f8fafc;
+        }
+        .tech-card {
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+        }
+        .tech-card.html { border-left-color: #e34f26; }
+        .tech-card.css { border-left-color: #1572b6; }
+        .tech-card.js { border-left-color: #f7df1e; }
+        .tech-card:hover {
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Навигация -->
+    <nav class="nav-glass shadow-sm fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl font-bold text-indigo-600 flex items-center hover:text-indigo-700 transition-colors">
+                        <i data-feather="code" class="mr-2"></i>
+                        CodeLingua
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">Басты бет</a>
+                    <a href="python.html" class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">Python</a>
+                    <a href="web.html" class="text-indigo-600 font-medium border-b-2 border-indigo-600 py-2">Web</a>
+                    <a href="php.html" class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">PHP</a>
+                    <a href="go.html" class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">Go</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-gray-600 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Мобильное меню -->
+    <div id="mobile-menu" class="hidden md:hidden nav-glass shadow-lg fixed top-16 w-full z-40">
+        <div class="px-4 pt-2 pb-3 space-y-1">
+            <a href="index.html" class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-lg transition-colors">Басты бет</a>
+            <a href="python.html" class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-lg transition-colors">Python</a>
+            <a href="web.html" class="block px-3 py-2 text-base font-medium text-indigo-600 bg-indigo-50 rounded-lg">Web</a>
+            <a href="php.html" class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-lg transition-colors">PHP</a>
+            <a href="go.html" class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-lg transition-colors">Go</a>
+        </div>
+    </div>
+
+    <!-- Герой секция -->
+    <section class="hero-gradient pt-24 pb-20 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <div class="flex justify-center mb-6">
+                    <div class="tech-badge px-6 py-2 rounded-full font-bold text-lg inline-flex items-center">
+                        <i data-feather="layers" class="mr-2 w-5 h-5"></i>
+                        Веб даму негіздері
+                    </div>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Web негіздері
+                </h1>
+                <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8 leading-relaxed">
+                    HTML, CSS және JavaScript - заманауи веб-қосымшалар мен веб-сайттарды құрудың негіздері.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <div class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm flex items-center">
+                        <div class="w-3 h-3 bg-[#e34f26] rounded-full mr-2"></div>
+                        HTML
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm flex items-center">
+                        <div class="w-3 h-3 bg-[#1572b6] rounded-full mr-2"></div>
+                        CSS
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm flex items-center">
+                        <div class="w-3 h-3 bg-[#f7df1e] rounded-full mr-2"></div>
+                        JavaScript
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контент -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Навигация кнопки -->
+            <div class="flex flex-col md:flex-row justify-between mb-12">
+                <a href="python.html" class="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center mb-4 md:mb-0">
+                    <i data-feather="arrow-left" class="mr-2"></i>
+                    Артқа
+                </a>
+                <a href="php.html" class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center">
+                    Келесі тіл
+                    <i data-feather="arrow-right" class="ml-2"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Основной контент -->
+                <div class="lg:col-span-2">
+                    <!-- Технологии карточки -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <!-- HTML Card -->
+                        <div class="tech-card html bg-white rounded-xl shadow-lg p-6 card-hover">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-[#e34f26] rounded-xl flex items-center justify-center text-white font-bold text-lg">
+                                    H
+                                </div>
+                                <h3 class="ml-4 text-xl font-bold text-gray-900">HTML</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                                Веб-беттің құрылымын анықтайтын белгілер тілі
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Статикалық</span>
+                                <span class="text-[#e34f26] font-semibold">Негіз</span>
+                            </div>
+                        </div>
+
+                        <!-- CSS Card -->
+                        <div class="tech-card css bg-white rounded-xl shadow-lg p-6 card-hover">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-[#1572b6] rounded-xl flex items-center justify-center text-white font-bold text-lg">
+                                    C
+                                </div>
+                                <h3 class="ml-4 text-xl font-bold text-gray-900">CSS</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                                Веб-беттердің стилі мен көрінісін басқаратын тіл
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Стиль</span>
+                                <span class="text-[#1572b6] font-semibold">Дизайн</span>
+                            </div>
+                        </div>
+
+                        <!-- JavaScript Card -->
+                        <div class="tech-card js bg-white rounded-xl shadow-lg p-6 card-hover">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-[#f7df1e] rounded-xl flex items-center justify-center text-gray-900 font-bold text-lg">
+                                    JS
+                                </div>
+                                <h3 class="ml-4 text-xl font-bold text-gray-900">JavaScript</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                                Веб-беттерді интерактивті ететін бағдарламалау тілі
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Динамикалық</span>
+                                <span class="text-[#d6ba32] font-semibold">Логика</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Сравнительная таблица -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 card-hover mb-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i data-feather="compare" class="mr-3 text-indigo-500"></i>
+                            Технологияларды салыстыру
+                        </h2>
+                        
+                        <div class="table-modern">
+                            <table class="w-full">
+                                <thead>
+                                    <tr>
+                                        <th class="rounded-tl-xl">Технология</th>
+                                        <th>Мақсаты</th>
+                                        <th>Ерекшеліктері</th>
+                                        <th class="rounded-tr-xl">Қолданылуы</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-orange-50 transition-colors">
+                                        <td class="font-semibold text-[#e34f26]">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 bg-[#e34f26] rounded-full mr-3"></div>
+                                                HTML
+                                            </div>
+                                        </td>
+                                        <td>Веб-беттің құрылымын анықтау</td>
+                                        <td>Белгілер тілі, статикалық</td>
+                                        <td>Барлық веб-сайттар</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50 transition-colors">
+                                        <td class="font-semibold text-[#1572b6]">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 bg-[#1572b6] rounded-full mr-3"></div>
+                                                CSS
+                                            </div>
+                                        </td>
+                                        <td>Веб-беттің стилін анықтау</td>
+                                        <td>Стильдер тілі, дизайн</td>
+                                        <td>Барлық веб-сайттар</td>
+                                    </tr>
+                                    <tr class="hover:bg-yellow-50 transition-colors">
+                                        <td class="font-semibold text-[#d6ba32]">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 bg-[#f7df1e] rounded-full mr-3"></div>
+                                                JavaScript
+                                            </div>
+                                        </td>
+                                        <td>Веб-беттің мінез-құлқын анықтау</td>
+                                        <td>Бағдарламалау тілі, динамикалық</td>
+                                        <td>Көптеген заманауи веб-сайттар</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Код мысалдары -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i data-feather="code" class="mr-3 text-indigo-500"></i>
+                            Код мысалдары
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- HTML код -->
+                            <div class="code-block p-6">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h4 class="text-white font-semibold flex items-center">
+                                        <div class="w-3 h-3 bg-[#e34f26] rounded-full mr-2"></div>
+                                        HTML
+                                    </h4>
+                                    <button class="copy-btn text-indigo-400 hover:text-indigo-300 text-sm flex items-center">
+                                        <i data-feather="copy" class="w-4 h-4 mr-1"></i>
+                                        Көшіру
+                                    </button>
+                                </div>
+                                <pre class="text-gray-100 text-xs overflow-x-auto">
+<span class="text-green-400">&lt;!-- Қарапайым HTML құрылымы --&gt;</span>
+<span class="text-blue-400">&lt;!DOCTYPE html&gt;</span>
+<span class="text-blue-400">&lt;html&gt;</span>
+<span class="text-blue-400">&lt;head&gt;</span>
+    <span class="text-blue-400">&lt;title&gt;</span>Менің веб-сайтым<span class="text-blue-400">&lt;/title&gt;</span>
+    <span class="text-blue-400">&lt;link</span> <span class="text-yellow-300">rel=</span><span class="text-yellow-300">"stylesheet"</span> 
+          <span class="text-yellow-300">href=</span><span class="text-yellow-300">"style.css"</span><span class="text-blue-400">&gt;</span>
+<span class="text-blue-400">&lt;/head&gt;</span>
+<span class="text-blue-400">&lt;body&gt;</span>
+    <span class="text-blue-400">&lt;h1&gt;</span>Сәлем, Әлем!<span class="text-blue-400">&lt;/h1&gt;</span>
+    <span class="text-blue-400">&lt;p&gt;</span>Бұл менің веб-сайтым.<span class="text-blue-400">&lt;/p&gt;</span>
+<span class="text-blue-400">&lt;/body&gt;</span>
+<span class="text-blue-400">&lt;/html&gt;</span></pre>
+                            </div>
+                            
+                            <!-- CSS код -->
+                            <div class="code-block p-6">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h4 class="text-white font-semibold flex items-center">
+                                        <div class="w-3 h-3 bg-[#1572b6] rounded-full mr-2"></div>
+                                        CSS
+                                    </h4>
+                                    <button class="copy-btn text-indigo-400 hover:text-indigo-300 text-sm flex items-center">
+                                        <i data-feather="copy" class="w-4 h-4 mr-1"></i>
+                                        Көшіру
+                                    </button>
+                                </div>
+                                <pre class="text-gray-100 text-xs overflow-x-auto">
+<span class="text-green-400">/* Қарапайым CSS стильдері */</span>
+<span class="text-blue-400">body</span> {
+    <span class="text-yellow-300">font-family</span>: <span class="text-yellow-300">'Poppins'</span>, <span class="text-yellow-300">sans-serif</span>;
+    <span class="text-yellow-300">background-color</span>: <span class="text-yellow-300">#f8fafc</span>;
+    <span class="text-yellow-300">color</span>: <span class="text-yellow-300">#1e293b</span>;
+}
+
+<span class="text-blue-400">h1</span> {
+    <span class="text-yellow-300">color</span>: <span class="text-yellow-300">#6366f1</span>;
+    <span class="text-yellow-300">font-size</span>: <span class="text-yellow-300">2.5rem</span>;
+    <span class="text-yellow-300">text-align</span>: <span class="text-yellow-300">center</span>;
+}</pre>
+                            </div>
+                            
+                            <!-- JavaScript код -->
+                            <div class="code-block p-6">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h4 class="text-white font-semibold flex items-center">
+                                        <div class="w-3 h-3 bg-[#f7df1e] rounded-full mr-2"></div>
+                                        JavaScript
+                                    </h4>
+                                    <button class="copy-btn text-indigo-400 hover:text-indigo-300 text-sm flex items-center">
+                                        <i data-feather="copy" class="w-4 h-4 mr-1"></i>
+                                        Көшіру
+                                    </button>
+                                </div>
+                                <pre class="text-gray-100 text-xs overflow-x-auto">
+<span class="text-green-400">// Қарапайым JavaScript коды</span>
+<span class="text-blue-400">document</span>.<span class="text-yellow-300">addEventListener</span>(
+  <span class="text-yellow-300">'DOMContentLoaded'</span>, () => {
+    
+    <span class="text-blue-400">const</span> button = <span class="text-blue-400">document</span>
+      .<span class="text-yellow-300">querySelector</span>(<span class="text-yellow-300">'#myButton'</span>);
+    
+    button.<span class="text-yellow-300">addEventListener</span>(
+      <span class="text-yellow-300">'click'</span>, () => {
+        <span class="text-blue-400">alert</span>(<span class="text-yellow-300">'Сәлем, Әлем!'</span>);
+    });
+});</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Боковая панель -->
+                <div class="space-y-6">
+                    <!-- Статистика -->
+                    <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-2xl p-6 shadow-xl">
+                        <h3 class="text-xl font-bold mb-4 flex items-center">
+                            <i data-feather="trending-up" class="mr-2"></i>
+                            Веб технологиялары
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span>Нарықтық сұраныс:</span>
+                                <span class="font-bold">Жоғары</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Қиындық:</span>
+                                <span class="font-bold">⭐️⭐️⭐️☆☆</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Жалақы деңгейі:</span>
+                                <span class="font-bold">$60K-$120K</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Жобалық уақыт:</span>
+                                <span class="font-bold">1-3 ай</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Бейне сабақтар -->
+                    <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                            <i data-feather="video" class="mr-2 text-indigo-500"></i>
+                            Бейне сабақтар
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <iframe class="w-full h-32 rounded-lg shadow-md" src="https://www.youtube.com/embed/I2uhl-jGxSk?si=kzq87dPji28TjaHe" title="HTML негіздері" frameborder="0" allowfullscreen></iframe>
+                                <p class="text-sm text-gray-600 mt-2 font-semibold">HTML негіздері</p>
+                            </div>
+                            <div class="aspect-w-16 aspect-h-9">
+                                <iframe class="w-full h-32 rounded-lg shadow-md" src="https://www.youtube.com/embed/27beS3d6XXQ?si=bvQPS29aePxdrdhU" title="CSS негіздері" frameborder="0" allowfullscreen></iframe>
+                                <p class="text-sm text-gray-600 mt-2 font-semibold">CSS негіздері</p>
+                            </div>
+                            <div class="aspect-w-16 aspect-h-9">
+                                <iframe class="w-full h-32 rounded-lg shadow-md" src="https://www.youtube.com/embed/H-Uwil_2qH0?si=a5lEanxI55A8KXQ3" title="JS негіздері" frameborder="0" allowfullscreen></iframe>
+                                <p class="text-sm text-gray-600 mt-2 font-semibold">JavaScript негіздері</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Қажеттіліктер -->
+                    <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Қажетті құралдар</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center p-3 bg-indigo-50 rounded-lg">
+                                <i data-feather="code" class="text-indigo-500 mr-3"></i>
+                                <span>VS Code редакторы</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                                <i data-feather="chrome" class="text-blue-500 mr-3"></i>
+                                <span>Brave браузері</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                <i data-feather="git-branch" class="text-green-500 mr-3"></i>
+                                <span>Git жүйесі</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-purple-50 rounded-lg">
+                                <i data-feather="terminal" class="text-purple-500 mr-3"></i>
+                                <span>Node.js ортасы</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-1">
+                    <span class="text-2xl font-bold text-white flex items-center mb-4">
+                        <i data-feather="code" class="mr-2"></i>
+                        CodeLingua
+                    </span>
+                    <p class="text-gray-400 leading-relaxed">
+                        Бағдарламалау тілдерін үйренуге арналған жетілдірілген платформа.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Беттер</h3>
+                    <ul class="space-y-2">
+                        <li><a href="python.html" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="chevron-right" class="w-4 h-4 mr-2"></i>Python</a></li>
+                        <li><a href="web.html" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="chevron-right" class="w-4 h-4 mr-2"></i>Web негіздері</a></li>
+                        <li><a href="php.html" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="chevron-right" class="w-4 h-4 mr-2"></i>PHP</a></li>
+                        <li><a href="go.html" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="chevron-right" class="w-4 h-4 mr-2"></i>Go</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Ресурстар</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="file-text" class="w-4 h-4 mr-2"></i>Құжаттама</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="book" class="w-4 h-4 mr-2"></i>Блог</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="message-square" class="w-4 h-4 mr-2"></i>Форум</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Байланыс</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="mail" class="w-4 h-4 mr-2"></i>Email</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="twitter" class="w-4 h-4 mr-2"></i>Twitter</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="github" class="w-4 h-4 mr-2"></i>GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">
+                    © 2025 CodeLingua. Барлық құқықтар қорғалған.
+                </p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 p-2 rounded-full hover:bg-gray-800">
+                        <i data-feather="twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 p-2 rounded-full hover:bg-gray-800">
+                        <i data-feather="github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 p-2 rounded-full hover:bg-gray-800">
+                        <i data-feather="linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // Мобильное меню
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Код копирование
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const codeBlock = this.parentElement.nextElementSibling;
+                const textToCopy = codeBlock.textContent;
+                
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i data-feather="check" class="w-4 h-4 mr-1"></i> Көшірілді!';
+                    feather.replace();
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        feather.replace();
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

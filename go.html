@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="kk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeLingua - Go тілі</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="website icon" type="png" href="go_icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #00ADD8 0%, #00ACD7 50%, #007D9C 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .code-block {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: #f8fafc;
+            border-radius: 1rem;
+            border: 1px solid #374151;
+        }
+        .go-badge {
+            background: linear-gradient(135deg, #00ADD8 0%, #00ACD7 100%);
+            color: white;
+        }
+        .feature-icon {
+            background: linear-gradient(135deg, #00ADD8 0%, #00ACD7 100%);
+        }
+        .syntax-highlight {
+            background: rgba(0, 173, 216, 0.1);
+            border-left: 4px solid #00ADD8;
+        }
+        .advantage-card {
+            border-left: 4px solid #00ADD8;
+            transition: all 0.3s ease;
+        }
+        .advantage-card:hover {
+            transform: translateX(5px);
+        }
+        .concurrency-badge {
+            background: linear-gradient(135deg, #00ADD8 0%, #007D9C 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Навигация -->
+    <nav class="nav-glass shadow-sm fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl font-bold text-indigo-600 flex items-center hover:text-indigo-700 transition-colors">
+                        <i data-feather="code" class="mr-2"></i>
+                        CodeLingua
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">Басты бет</a>
+                    <a href="python.html" class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">Python</a>
+                    <a href="web.html" class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">Web</a>
+                    <a href="php.html" class="text-gray-600 hover:text-indigo-600 transition-colors duration-300">PHP</a>
+                    <a href="go.html" class="text-indigo-600 font-medium border-b-2 border-indigo-600 py-2">Go</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-gray-600 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Мобильное меню -->
+    <div id="mobile-menu" class="hidden md:hidden nav-glass shadow-lg fixed top-16 w-full z-40">
+        <div class="px-4 pt-2 pb-3 space-y-1">
+            <a href="index.html" class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-lg transition-colors">Басты бет</a>
+            <a href="python.html" class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-lg transition-colors">Python</a>
+            <a href="web.html" class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-lg transition-colors">Web</a>
+            <a href="php.html" class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-lg transition-colors">PHP</a>
+            <a href="go.html" class="block px-3 py-2 text-base font-medium text-indigo-600 bg-indigo-50 rounded-lg">Go</a>
+        </div>
+    </div>
+
+    <!-- Герой секция -->
+    <section class="hero-gradient pt-24 pb-20 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <div class="flex justify-center mb-6">
+                    <div class="go-badge px-6 py-2 rounded-full font-bold text-lg inline-flex items-center">
+                        <i data-feather="zap" class="mr-2 w-5 h-5"></i>
+                        Жоғары өнімділік
+                    </div>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Go тілі
+                </h1>
+                <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8 leading-relaxed">
+                    Google жасаған жылдам, тиімді және қарапайым бағдарламалау тілі.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <div class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+                        ⚡ Жылдам орындалу
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+                        🔄 Конкуренттілік
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+                        🏗️ Қарапайым синтаксис
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+                        📦 Кірістіруге дайын
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контент -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Навигация кнопки -->
+            <div class="flex flex-col md:flex-row justify-between mb-12">
+                <a href="php.html" class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center mb-4 md:mb-0">
+                    <i data-feather="arrow-left" class="mr-2"></i>
+                    Артқа
+                </a>
+                <a href="index.html" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center">
+                    Басты бетке
+                    <i data-feather="arrow-right" class="ml-2"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Основной контент -->
+                <div class="lg:col-span-2">
+                    <!-- О Go -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 card-hover mb-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i data-feather="info" class="mr-3 text-cyan-500"></i>
+                            Go туралы
+                        </h2>
+                        <div class="prose max-w-none text-gray-600 leading-relaxed">
+                            <p class="text-lg mb-6">
+                                <strong>Go (немесе Golang)</strong> - бұл Google компаниясы жасаған статикалық түрде тексерілетін, жылкомпиляцияланатын бағдарламалау тілі. Ол қарапайымдылық, тиімділік және сенімділік принциптеріне негізделген.
+                            </p>
+                            <p class="mb-6">
+                                Go тілінде жазылған бағдарламалар жоғары өнімділікке ие және көп ядролы процессорларда оңтайлы жұмыс істей алады. Ол бұлттық қосымшалар, веб-серверлер және жүйелік бағдарламалар жасау үшін өте қолайлы.
+                            </p>
+                            
+                            <div class="syntax-highlight p-6 rounded-lg mb-6">
+                                <h4 class="font-semibold text-cyan-700 mb-3">🎯 Негізгі ерекшеліктері:</h4>
+                                <ul class="list-disc list-inside space-y-2 text-cyan-800">
+                                    <li>Статикалық типтеу және жылдам компиляция</li>
+                                    <li>Горутиндер арқылы конкуренттілік</li>
+                                    <li>Кірістіруге дайын бинарлық файлдар</li>
+                                    <li>Кең стандартты кітапхана</li>
+                                    <li>Қарапайым және оқуға жеңіл синтаксис</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Артықшылықтар -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 card-hover mb-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i data-feather="award" class="mr-3 text-cyan-500"></i>
+                            Go тілінің артықшылықтары
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Конкуренттілік -->
+                            <div class="advantage-card bg-white rounded-xl shadow-lg p-6 card-hover">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-cyan-500 rounded-xl flex items-center justify-center text-white">
+                                        <i data-feather="cpu"></i>
+                                    </div>
+                                    <h3 class="ml-4 text-xl font-bold text-gray-900">Конкуренттілік</h3>
+                                </div>
+                                <p class="text-gray-600 text-sm leading-relaxed">
+                                    Горутиндер мен channel'дар арқылы оңтайлы конкуренттілік модельі
+                                </p>
+                            </div>
+
+                            <!-- Өнімділік -->
+                            <div class="advantage-card bg-white rounded-xl shadow-lg p-6 card-hover">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-cyan-500 rounded-xl flex items-center justify-center text-white">
+                                        <i data-feather="activity"></i>
+                                    </div>
+                                    <h3 class="ml-4 text-xl font-bold text-gray-900">Өнімділік</h3>
+                                </div>
+                                <p class="text-gray-600 text-sm leading-relaxed">
+                                    C тіліне жақын жылдамдықпен орындалады
+                                </p>
+                            </div>
+
+                            <!-- Қарапайымдылық -->
+                            <div class="advantage-card bg-white rounded-xl shadow-lg p-6 card-hover">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-cyan-500 rounded-xl flex items-center justify-center text-white">
+                                        <i data-feather="feather"></i>
+                                    </div>
+                                    <h3 class="ml-4 text-xl font-bold text-gray-900">Қарапайымдылық</h3>
+                                </div>
+                                <p class="text-gray-600 text-sm leading-relaxed">
+                                    Минималистік синтаксис және аз кілт сөздер
+                                </p>
+                            </div>
+
+                            <!-- Кірістіру -->
+                            <div class="advantage-card bg-white rounded-xl shadow-lg p-6 card-hover">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-cyan-500 rounded-xl flex items-center justify-center text-white">
+                                        <i data-feather="package"></i>
+                                    </div>
+                                    <h3 class="ml-4 text-xl font-bold text-gray-900">Кірістіру</h3>
+                                </div>
+                                <p class="text-gray-600 text-sm leading-relaxed">
+                                    Сыртқы тәуелділіксіз бір бинарлық файл
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Код мысалы -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                            <i data-feather="code" class="mr-3 text-cyan-500"></i>
+                            Код мысалдары
+                        </h2>
+                        
+                        <div class="code-block p-6 mb-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-white font-semibold">🎯 Негізгі Go бағдарламасы</h4>
+                                <button class="copy-btn text-cyan-400 hover:text-cyan-300 text-sm flex items-center">
+                                    <i data-feather="copy" class="w-4 h-4 mr-1"></i>
+                                    Көшіру
+                                </button>
+                            </div>
+                            <pre class="text-gray-100 overflow-x-auto text-sm">
+<span class="text-green-400">// Қарапайым Go бағдарламасы</span>
+<span class="text-blue-400">package</span> main
+
+<span class="text-blue-400">import</span> (
+    <span class="text-yellow-300">"fmt"</span>
+    <span class="text-yellow-300">"time"</span>
+)
+
+<span class="text-blue-400">func</span> <span class="text-yellow-300">main</span>() {
+    <span class="text-green-400">// Негізгі "Сәлем, Әлем!" бағдарламасы</span>
+    fmt.<span class="text-yellow-300">Println</span>(<span class="text-yellow-300">"Сәлем, Әлем! Go тіліне қош келдіңіз!"</span>)
+    
+    <span class="text-green-400">// Айнымалылармен жұмыс</span>
+    аты := <span class="text-yellow-300">"Go"</span>
+    версия := <span class="text-purple-300">1.21</span>
+    fmt.<span class="text-yellow-300">Printf</span>(<span class="text-yellow-300">"Мен %s %.1f үйренемін\n"</span>, аты, версия)
+    
+    <span class="text-green-400">// Фибоначчи қатарын шығару</span>
+    <span class="text-yellow-300">fibonacci</span>(<span class="text-purple-300">1000</span>)
+}
+
+<span class="text-green-400">// Фибоначчи функциясы</span>
+<span class="text-blue-400">func</span> <span class="text-yellow-300">fibonacci</span>(n <span class="text-blue-400">int</span>) {
+    a, b := <span class="text-purple-300">0</span>, <span class="text-purple-300">1</span>
+    fmt.<span class="text-yellow-300">Print</span>(<span class="text-yellow-300">"Фибоначчи қатары: "</span>)
+    <span class="text-blue-400">for</span> a &lt; n {
+        fmt.<span class="text-yellow-300">Printf</span>(<span class="text-yellow-300">"%d "</span>, a)
+        a, b = b, a+b
+    }
+    fmt.<span class="text-yellow-300">Println</span>()
+}</pre>
+                        </div>
+
+                        <div class="code-block p-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-white font-semibold">🔄 Конкуренттілік мысалы</h4>
+                                <button class="copy-btn text-cyan-400 hover:text-cyan-300 text-sm flex items-center">
+                                    <i data-feather="copy" class="w-4 h-4 mr-1"></i>
+                                    Көшіру
+                                </button>
+                            </div>
+                            <pre class="text-gray-100 overflow-x-auto text-sm">
+<span class="text-green-400">// Горутиндер мен channel'дар мысалы</span>
+<span class="text-blue-400">package</span> main
+
+<span class="text-blue-400">import</span> (
+    <span class="text-yellow-300">"fmt"</span>
+    <span class="text-yellow-300">"time"</span>
+)
+
+<span class="text-blue-400">func</span> <span class="text-yellow-300">worker</span>(id <span class="text-blue-400">int</span>, jobs &lt;-<span class="text-blue-400">chan</span> <span class="text-blue-400">int</span>, results <span class="text-blue-400">chan</span>&lt;- <span class="text-blue-400">int</span>) {
+    <span class="text-blue-400">for</span> j := <span class="text-blue-400">range</span> jobs {
+        fmt.<span class="text-yellow-300">Printf</span>(<span class="text-yellow-300">"Worker %d started job %d\n"</span>, id, j)
+        time.<span class="text-yellow-300">Sleep</span>(time.Second)
+        fmt.<span class="text-yellow-300">Printf</span>(<span class="text-yellow-300">"Worker %d finished job %d\n"</span>, id, j)
+        results &lt;- j * <span class="text-purple-300">2</span>
+    }
+}
+
+<span class="text-blue-400">func</span> <span class="text-yellow-300">main</span>() {
+    jobs := <span class="text-blue-400">make</span>(<span class="text-blue-400">chan</span> <span class="text-blue-400">int</span>, <span class="text-purple-300">100</span>)
+    results := <span class="text-blue-400">make</span>(<span class="text-blue-400">chan</span> <span class="text-blue-400">int</span>, <span class="text-purple-300">100</span>)
+
+    <span class="text-green-400">// 3 worker бастау</span>
+    <span class="text-blue-400">for</span> w := <span class="text-purple-300">1</span>; w &lt;= <span class="text-purple-300">3</span>; w++ {
+        <span class="text-blue-400">go</span> <span class="text-yellow-300">worker</span>(w, jobs, results)
+    }
+
+    <span class="text-green-400">// 5 жұмыс жіберу</span>
+    <span class="text-blue-400">for</span> j := <span class="text-purple-300">1</span>; j &lt;= <span class="text-purple-300">5</span>; j++ {
+        jobs &lt;- j
+    }
+    <span class="text-blue-400">close</span>(jobs)
+
+    <span class="text-green-400">// Нәтижелерді алу</span>
+    <span class="text-blue-400">for</span> a := <span class="text-purple-300">1</span>; a &lt;= <span class="text-purple-300">5</span>; a++ {
+        &lt;-results
+    }
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Боковая панель -->
+                <div class="space-y-6">
+                    <!-- Статистика -->
+                    <div class="bg-gradient-to-br from-cyan-500 to-blue-600 text-white rounded-2xl p-6 shadow-xl">
+                        <h3 class="text-xl font-bold mb-4 flex items-center">
+                            <i data-feather="trending-up" class="mr-2"></i>
+                            Go статистикасы
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span>Танымалдық:</span>
+                                <span class="font-bold">10-орын</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Жалақы деңгейі:</span>
+                                <span class="font-bold">$90K-$150K</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Қиындық:</span>
+                                <span class="font-bold">⭐️⭐️⭐️⭐️☆</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Компиляция:</span>
+                                <span class="font-bold">Жылдам</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Конкуренттілік -->
+                    <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                            <i data-feather="cpu" class="mr-2 text-cyan-500"></i>
+                            Конкуренттілік
+                        </h3>
+                        <div class="concurrency-badge px-4 py-2 rounded-lg text-center mb-4">
+                            <span class="font-bold">Горутиндер + Channel'дар</span>
+                        </div>
+                        <div class="space-y-3 text-sm text-gray-600">
+                            <div class="flex items-center">
+                                <i data-feather="check" class="w-4 h-4 text-green-500 mr-2"></i>
+                                <span>Жеңілдетілген конкуренттілік</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-feather="check" class="w-4 h-4 text-green-500 mr-2"></i>
+                                <span>Тәжірибелік deadlock'тар</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-feather="check" class="w-4 h-4 text-green-500 mr-2"></i>
+                                <span>Автоматты memory management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Бейне сабақ -->
+                    <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                            <i data-feather="video" class="mr-2 text-cyan-500"></i>
+                            Бейне сабақтар
+                        </h3>
+                        <div class="aspect-w-16 aspect-h-9">
+                            <iframe class="w-full h-48 rounded-xl shadow-md" src="https://www.youtube.com/embed/44vDOqeJCo0?si=mrD0tj8QrzEDVvc-" title="Go тілі негіздері" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <p class="text-sm text-gray-600 mt-2 font-semibold">Go тілі негіздері</p>
+                        </div>
+                        <div class="mt-4 space-y-2">
+                            <a href="#" class="flex items-center text-cyan-600 hover:text-cyan-700 text-sm">
+                                <i data-feather="play-circle" class="mr-2 w-4 h-4"></i>
+                                Конкуренттілік туралы
+                            </a>
+                            <a href="#" class="flex items-center text-cyan-600 hover:text-cyan-700 text-sm">
+                                <i data-feather="play-circle" class="mr-2 w-4 h-4"></i>
+                                Веб-сервер жасау
+                            </a>
+                            <a href="#" class="flex items-center text-cyan-600 hover:text-cyan-700 text-sm">
+                                <i data-feather="play-circle" class="mr-2 w-4 h-4"></i>
+                                Go модульдері
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Қолданылу аясы -->
+                    <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                            <i data-feather="briefcase" class="mr-2 text-cyan-500"></i>
+                            Қолданылу аясы
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center p-3 bg-cyan-50 rounded-lg">
+                                <i data-feather="cloud" class="text-cyan-500 mr-3"></i>
+                                <span>Бұлттық қосымшалар</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                                <i data-feather="server" class="text-blue-500 mr-3"></i>
+                                <span>Веб-серверлер</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                <i data-feather="database" class="text-green-500 mr-3"></i>
+                                <span>Дерекқор құралдары</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-purple-50 rounded-lg">
+                                <i data-feather="terminal" class="text-purple-500 mr-3"></i>
+                                <span>CLI құралдары</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Форма -->
+                    <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Қай тілді үйренгіңіз келеді?</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label for="language" class="block text-gray-700 font-medium mb-2">Тілді таңдаңыз</label>
+                                <select id="language" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all">
+                                    <option value="">-- Таңдаңыз --</option>
+                                    <option value="python">Python</option>
+                                    <option value="web">HTML/CSS/JavaScript</option>
+                                    <option value="php">PHP</option>
+                                    <option value="go">Go</option>
+                                    <option value="other">Басқа</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Электрондық пошта</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all" placeholder="email@example.com" required>
+                            </div>
+                            <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                                <i data-feather="send" class="mr-2"></i>
+                                Жіберу
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-1">
+                    <span class="text-2xl font-bold text-white flex items-center mb-4">
+                        <i data-feather="code" class="mr-2"></i>
+                        CodeLingua
+                    </span>
+                    <p class="text-gray-400 leading-relaxed">
+                        Бағдарламалау тілдерін үйренуге арналған жетілдірілген платформа.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Беттер</h3>
+                    <ul class="space-y-2">
+                        <li><a href="python.html" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="chevron-right" class="w-4 h-4 mr-2"></i>Python</a></li>
+                        <li><a href="web.html" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="chevron-right" class="w-4 h-4 mr-2"></i>Web негіздері</a></li>
+                        <li><a href="php.html" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="chevron-right" class="w-4 h-4 mr-2"></i>PHP</a></li>
+                        <li><a href="go.html" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="chevron-right" class="w-4 h-4 mr-2"></i>Go</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Ресурстар</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="file-text" class="w-4 h-4 mr-2"></i>Құжаттама</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="book" class="w-4 h-4 mr-2"></i>Блог</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="message-square" class="w-4 h-4 mr-2"></i>Форум</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Байланыс</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="mail" class="w-4 h-4 mr-2"></i>Email</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="twitter" class="w-4 h-4 mr-2"></i>Twitter</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 flex items-center">
+                            <i data-feather="github" class="w-4 h-4 mr-2"></i>GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">
+                    © 2025 CodeLingua. Барлық құқықтар қорғалған.
+                </p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 p-2 rounded-full hover:bg-gray-800">
+                        <i data-feather="twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 p-2 rounded-full hover:bg-gray-800">
+                        <i data-feather="github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 p-2 rounded-full hover:bg-gray-800">
+                        <i data-feather="linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // Мобильное меню
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Код копирование
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const codeBlock = this.parentElement.nextElementSibling;
+                const textToCopy = codeBlock.textContent;
+                
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i data-feather="check" class="w-4 h-4 mr-1"></i> Көшірілді!';
+                    feather.replace();
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        feather.replace();
+                    }, 2000);
+                });
+            });
+        });
+
+        // Форма обработки
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const language = document.getElementById('language').value;
+            const email = document.getElementById('email').value;
+            
+            if (language && email) {
+                alert('Рахмет! Сіздің таңдауыңыз қабылданды. Жақын арада сізбен хабарласамыз!');
+                this.reset();
+            }
+        });
+    </script>
+</body>
+</html>
